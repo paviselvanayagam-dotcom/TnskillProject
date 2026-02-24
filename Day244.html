@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Manager Pro</title>
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    padding:40px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.form-group{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+input{
+    flex:1;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.primary{ background:#4CAF50; color:white; }
+.danger{ background:#f44336; color:white; }
+.info{ background:#2196F3; color:white; }
+.warning{ background:#ff9800; color:white; }
+
+button:hover{
+    opacity:0.8;
+}
+
+.controls{
+    margin-bottom:20px;
+}
+
+.card{
+    background:#f9f9f9;
+    padding:15px;
+    border-left:6px solid #4CAF50;
+    margin-bottom:10px;
+    border-radius:6px;
+}
+
+.high{ color:green; font-weight:bold; }
+.low{ color:red; font-weight:bold; }
+
+#loading{
+    color:#ff9800;
+    font-weight:bold;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Employee Manager</h1>
+
+    <!-- FORM -->
+    <form id="empForm">
+        <div class="form-group">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="number" id="salary" placeholder="Salary" required>
+            <input type="text" id="department" placeholder="Department" required>
+            <button class="primary" type="submit">Add Employee</button>
+        </div>
+    </form>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+        <button class="danger" onclick="deleteLast()">Delete Last</button>
+        <button class="danger" onclick="deleteFirst()">Delete First</button>
+        <button class="info" onclick="showEmployees()">Show Employees</button>
+        <button class="warning" onclick="showAverage()">Show Average Salary</button>
+        <button class="info" onclick="loadAPI()">Load API Employees</button>
+    </div>
+
+    <h3 id="loading"></h3>
+    <div id="output"></div>
+
+</div>
+
+<script>
+
+let employees = []; // ARRAY
+
+/* ==========================
+   ADD EMPLOYEE (push)
+========================== */
+document.getElementById("empForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let name = document.getElementById("name").value.trim();
+    let salary = Number(document.getElementById("salary").value);
+    let department = document.getElementById("department").value.trim();
+
+    // VALIDATION
+    if(name === "" || salary <= 0 || department === ""){
+        alert("All fields required!");
+        return;
+    }
+
+    // STRING METHOD
+    name = name.toUpperCase();
+
+    // STORE AS OBJECT
+    const employee = {
+        name,
+        salary,
+        department
+    };
+
+    employees.push(employee); // push
+    alert("Employee Added Successfully!");
+    document.getElementById("empForm").reset();
+});
+
+
+/* ==========================
+   DELETE
+========================== */
+function deleteLast(){
+    employees.pop(); // pop
+    alert("Last Employee Deleted");
+}
+
+function deleteFirst(){
+    employees.shift(); // shift
+    alert("First Employee Deleted");
+}
+
+
+/* ==========================
+   DISPLAY (Arrow Function)
+========================== */
+const showEmployees = () => {
+
+    let output = "";
+
+    // SPREAD (copy)
+    const copiedEmployees = [...employees];
+
+    // FOR LOOP
+    for(let i=0;i<copiedEmployees.length;i++){
+        console.log("For:",copiedEmployees[i]);
+    }
+
+    // FOR OF + DESTRUCTURING
+    for(const {name, salary, department} of copiedEmployees){
+
+        let status = salary > 30000 ?
+            `<span class="high">High Salary</span>` :
+            `<span class="low">Low Salary</span>`;
+
+        // TEMPLATE LITERALS
+        output += `
+            <div class="card">
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Salary:</strong> ${salary}</p>
+                <p><strong>Department:</strong> ${department}</p>
+                <p>${status}</p>
+            </div>
+        `;
+    }
+
+    document.getElementById("output").innerHTML = output;
+
+    /* ==========================
+       ARRAY METHODS
+    ========================== */
+
+    const salaries = employees.map(emp => emp.salary);
+    console.log("map salaries:", salaries);
+
+    const filtered = employees.filter(emp => emp.salary > 30000);
+    console.log("filter >30000:", filtered);
+
+    const total = employees.reduce((sum, emp)=> sum + emp.salary, 0);
+    console.log("reduce total salary:", total);
+
+    /* ==========================
+       JSON
+    ========================== */
+    const jsonData = JSON.stringify(employees);
+    console.log("JSON:", jsonData);
+
+    const parsed = JSON.parse(jsonData);
+    console.log("Parsed:", parsed);
+};
+
+
+/* ==========================
+   AVERAGE SALARY
+========================== */
+function showAverage(){
+    if(employees.length === 0){
+        alert("No Employees Available");
+        return;
+    }
+
+    const total = employees.reduce((sum, emp)=> sum + emp.salary, 0);
+    const average = total / employees.length;
+
+    alert(`Average Salary: ${average}`);
+}
+
+
+/* ==========================
+   REST (Sum Salaries)
+========================== */
+function sumSalaries(...numbers){
+    return numbers.reduce((a,b)=>a+b,0);
+}
+
+
+/* ==========================
+   PROMISE (Fake Loading)
+========================== */
+function fakeLoading(){
+    return new Promise(resolve=>{
+        document.getElementById("loading").innerText = "Loading API Employees...";
+        setTimeout(()=>{
+            document.getElementById("loading").innerText = "";
+            resolve();
+        },2000);
+    });
+}
+
+
+/* ==========================
+   AJAX (Fetch API)
+========================== */
+function loadAPI(){
+
+    fakeLoading().then(()=>{
+
+        fetch("https://jsonplaceholder.typicode.com/users")
+        .then(res=>res.json())
+        .then(data=>{
+
+            data.slice(0,5).forEach(user=>{
+                employees.push({
+                    name:user.name.toUpperCase(),
+                    salary:Math.floor(Math.random()*50000)+20000,
+                    department:"API"
+                });
+            });
+
+            alert("API Employees Loaded!");
+        });
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
