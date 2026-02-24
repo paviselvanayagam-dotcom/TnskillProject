@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tech TNSkill Event</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+/* 
+   1. Navigation Bar
+ */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    background-color: #222;
+    padding: 15px;
+}
+
+nav ul {
+    list-style: none;  
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;  
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: pink;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 12px;
+}
+
+nav ul li a:hover {
+    background-color: orangered;
+    border-radius: 5px;
+}
+
+/* 
+   2. Hero Section
+ */
+
+.hero {
+    background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;               
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 50px;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+/* 
+   3. Event Section
+ */
+
+.features {
+    display: flex;
+    justify-content: space-around; 
+    padding: 40px;
+}
+
+.box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    width: 25%;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0.95;
+}
+
+/* 
+   4. Image Gallery
+ */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 40px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+    border-radius: 8px;
+}
+
+/*
+   5. Registration Table
+ */
+
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid aliceblue;
+}
+
+th {
+    background-color:red;
+    color: black;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+tr:hover {
+    background-color: wheat;
+}
+
+/* 
+   6. Register Button
+ */
+
+.register-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 15px 30px;
+    background-color: orangered;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+.register-btn:hover {
+    background-color: gray;
+    transform: scale(1.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 50px;
+            text-align: left;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #ff6600;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #222;
+            transform: scale(1.1);
+        }
+    
+
+/* 
+   7. Footer
+ */
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* 
+   8. Fixed Help Button
+*/
+
+.help-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+/*
+   9. Responsive Design
+ */
+
+@media (max-width: 768px) {
+
+    nav ul li {
+        display: block;   
+        margin: 10px 0;
+    }
+
+    .features {
+        flex-direction: column;  
+        align-items: center;
+    }
+
+    .box {
+        width: 80%;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;  
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- 1. Navigation -->
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- 2. Hero Section -->
+<section class="hero">
+    <div>
+        <h1>TNSkill 2026 Batch</h1>
+        <p>Experience Innovation, Coding with HTML and CSS</p>
+    </div>
+</section>
+
+<!-- 3. Features -->
+<section class="features">
+    <div class="box">
+        <h2>Coding Contest</h2>
+        <p>Show your coding skills</p>
+    </div>
+
+    <div class="box">
+        <h2>Robotics Show</h2>
+        <p>Explore the future of robotics.</p>
+    </div>
+
+    <div class="box">
+        <h2>AI Workshop</h2>
+        <p>Learn Artificial Intelligence basics.</p>
+    </div>
+</section>
+
+<!-- 4. Gallery -->
+<section class="gallery">
+    
+        <img src="baby2.jpg"alt="Event 1">
+        <img src="babyy.jpg"alt="Event 2">
+        <img src="flower.jpg" alt="Event 3">
+        <img src="flower2.jpg" alt="Event 4">
+        <img src="girl.jpg" alt="Event 5">
+        <img src="girl1.jpg" alt="Event 6">
+    
+</section>
+
+<!-- 5. Table -->
+<table>
+    <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Venue</th>
+    </tr>
+    <tr>
+        <td>Coding Contest</td>
+        <td>March 10</td>
+        <td>10 AM</td>
+        <td>Hall A</td>
+    </tr>
+    <tr>
+        <td>AI Show</td>
+        <td>March 11</td>
+        <td>12 PM</td>
+        <td>Hall B</td>
+    </tr>
+    <tr>
+        <td>database Frontend Develper</td>
+        <td>Jan 05</td>
+        <td>4 PM</td>
+        <td>Online</td>
+    </tr>
+</table>
+
+<!--  Register Button -->
+<button class="register-btn">Register Now</button>
+
+<h1>Event Registration</h1>
+    <p>Fill in your details to register:</p>
+
+    <form action="#">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Your Name" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Your Email" required><br>
+
+        <input type="submit" value="Submit Registration">
+    </form>
+
+<!--  Footer -->
+<footer>
+    <p>Contact: paviyamary@gmail.com.com | Phone: 9944556622</p>
+</footer>
+
+
+<div class="help-btn">Help</div>
+
+</body>
+</html>
